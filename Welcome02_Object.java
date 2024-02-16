@@ -10,6 +10,7 @@ public class Welcome02_Object {
 
       Observation ob1 = ds1.fetch("Observation", "weather", "temp_f", "wind_degrees");
       System.out.println(id1 + ": " + ob1);
+
       
       String id2 = "KSAV";
       DataSource ds2 = DataSource.connect("http://weather.gov/xml/current_obs/" + id2 + ".xml"); 
@@ -19,10 +20,31 @@ public class Welcome02_Object {
       Observation ob2 = ds2.fetch("Observation", "weather", "temp_f", "wind_degrees");
       System.out.println(id2 + ": " + ob2);
       
+
+      String id3 = "KCRQ";
+      DataSource ds3 = DataSource.connect("https://w1.weather.gov/xml/current_obs/" + id3 + ".xml");
+      ds3.setCacheTimeout(15*60);
+      ds3.load();
+
+      Observation ob3 = ds3.fetch("Observation", "weather", "temp_f", "wind_degrees");
+      System.out.println(id3 + ": " + ob3);
+      
+      Observation object;
+      String id;
+
       if (ob1.colderThan(ob2)) {
-         System.out.println("Colder at " + id1);
+         object = ob1;
+         id = id1;
+
       } else {
-         System.out.println("Colder at " + id2);
+         object = ob2;
+         id = id2;
+      }
+
+      if (object.colderThan(ob3)) {
+         System.out.println("The coldest location is: " + id);
+      } else {
+         System.out.println("The coldest location is: " + id3);
       }
    }
 }
