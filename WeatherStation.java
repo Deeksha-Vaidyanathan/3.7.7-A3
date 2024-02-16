@@ -26,6 +26,9 @@ public class WeatherStation {
    public String getName() { 
       return name;
    }
+
+   // Produces the latitude of this station
+   public double getLat() { return lat; }
    
    /* Determine if this weather station is located in the given state */
    public boolean isLocatedInState(String st) {
